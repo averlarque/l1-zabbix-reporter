@@ -2,13 +2,12 @@ import pickle
 import os
 from pyzabbix import ZabbixAPI
 from datetime import datetime
+from pathlib import PurePath
 
 
-if os.name == 'nt':
-	temp_path = os.getcwd() + '\\templates\\'
-else:
-	temp_path = os.getcwd() + '/templates/'
-static_path = temp_path + 'static'
+pure_path_templates = PurePath(os.getcwd()).joinpath('templates')
+temp_path = str(pure_path_templates)
+static_path = str(pure_path_templates.joinpath('static'))
 
 
 def get_hours():

@@ -4,6 +4,7 @@ import markup
 import webbrowser
 import os
 from handlers import p_load
+from pathlib import PurePath
 
 
 class CountPeriodReport:
@@ -127,10 +128,8 @@ class CountPeriodReport:
 		if 'reports' not in os.listdir(os.getcwd()):
 			os.mkdir('reports')
 		# Check OS to choose type of path used
-		if os.name == 'nt':
-			path = os.getcwd() + '\\reports\\' + file_name + '.' + report_type
-		else:
-			path = os.getcwd() + '/reports/' + file_name + '.' + report_type
+		p_path = PurePath(os.getcwd()).joinpath('reports').joinpath(file_name + '.' + report_type)
+		path = str(p_path)
 		return path
 
 	def write_report_data_txt(self, file_object, data):
