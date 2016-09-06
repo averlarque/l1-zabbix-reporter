@@ -119,10 +119,11 @@ app.error_handler = handler
 # run(app, host='localhost', port=8060, debug=True)
 
 if __name__ == '__main__':
+	port = 8060
 	from threading import Thread
-	app_thread = Thread(target=run, kwargs=dict(app=app, host='localhost', port=8060))
+	app_thread = Thread(target=run, kwargs=dict(app=app, host='localhost', port=port))
 	app_thread.start()
 	# Open the web browser
-	webbrowser.open('http://localhost:{0}/login'.format(8080))
+	webbrowser.open('http://localhost:{0}/login'.format(port))
 
 
