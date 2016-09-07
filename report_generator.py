@@ -1,10 +1,10 @@
 from zabbix import ZabbixApi
 import sqlite3
-import markup
 import webbrowser
 import os
 from handlers import p_load
 from pathlib import PurePath
+from app import render
 
 
 class CountPeriodReport:
@@ -148,33 +148,30 @@ class CountPeriodReport:
 			self.write_report_data_txt(f, items)
 		os.startfile(path)
 
-	def write_report_data_html(self, page_object, data):
-		"""Writing report data in html-file"""
-		for item in self._generator(data):
-			line = item[0] + ' ' + 'x' + str(item[1])
-			page_object.li(line)
+	def write_report_data_html(self, data):
+		"""Writing report data in list"""
+		lines = [item[0] + ' ' + 'x' + str(item[1]) for item in self._generator(data)]
+		return lines
 
 	def create_html_report(self, items, file_name):
 		"""Generating html report file"""
 		# Check OS to choose type of path used
 		path = self._check_report_path(file_name, 'html')
 		# Init html page markdown
-		page = markup.page()
-		page.init(title='Zabbix Report ' + file_name)
-		page.div()
-		for line in self.general_report_data:
-			page.h4(line)
-		page.div.close()
-		page.div()
-		page.ul()
+		report_data = self.write_report_data_html(items)
+		if type(report_data) is list:
+			typ = '0'
+		else:
+			typ = '1'
+		context = {'general_report_data': self.general_report_data,
+		           'file_name': file_name,
+		           'report_data': report_data,
+		           'type': typ}
+			
 		# Write into the file
-		self.write_report_data_html(page, items)
-		page.ul.close()
-		page.div.close()
-		page = str(page)
-
 		with open(path, "w+") as f:
-			f.write(page)
+			html = render('report_template.tpl', context)
+			f.write(html)
 		webbrowser.open_new("file:///" + path)
 
 
@@ -256,12 +253,14 @@ class EventPeriodReport(CountPeriodReport):
 			for event in data.get(item):
 				file_object.writelines(event + '\n')
 
-	def write_report_data_html(self, page_object, data):
+	def write_report_data_html(self, data):
+		lines = {}
 		for item in self._generator(data):
-			page_object.ul(item)
+			events =[]
+			lines.update(item=events)
 			for event in data.get(item):
-				page_object.li(event)
-			page_object.ul.close()
+				events.append(event)
+		return lines
 
 
 class ProjectEventPeriodReport(EventPeriodReport):
