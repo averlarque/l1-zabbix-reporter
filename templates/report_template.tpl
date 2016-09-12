@@ -20,11 +20,11 @@ Zabbix report - {{file_name}}
 		<li>{{item}}</li>
 		{% endfor %}
 	{% else %}
-		{% for item in report_data %}
+		{% for item, value in report_data.items() %}
 			<ul>{{item}}
-				{% for time in item.values() %}
-					<li>{{time}}</li>
-				{% endfor %}
+			{% for time in value %}
+				<li>{{time}}</li>
+			{% endfor %}	
 			</ul>
 		{% endfor %}
 	{% endif %}

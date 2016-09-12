@@ -159,6 +159,7 @@ class CountPeriodReport:
 		path = self._check_report_path(file_name, 'html')
 		# Init html page markdown
 		report_data = self.write_report_data_html(items)
+		
 		if type(report_data) is list:
 			typ = '0'
 		else:
@@ -257,9 +258,9 @@ class EventPeriodReport(CountPeriodReport):
 		lines = {}
 		for item in self._generator(data):
 			events =[]
-			lines.update(item=events)
+			lines.update({item: events})
 			for event in data.get(item):
-				events.append(event)
+				lines[item].append(event)
 		return lines
 
 
