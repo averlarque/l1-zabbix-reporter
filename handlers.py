@@ -4,10 +4,10 @@ from pyzabbix import ZabbixAPI
 from datetime import datetime
 from pathlib import PurePath
 
-
 pure_path_templates = PurePath(os.getcwd()).joinpath('templates')
 temp_path = str(pure_path_templates)
 static_path = str(pure_path_templates.joinpath('static'))
+today = datetime.now()
 
 
 def get_hours():
@@ -33,7 +33,6 @@ def get_minutes():
 
 
 def get_dates():
-	today = datetime.now()
 	if 9 < today.hour < 21:
 		since_date = today.date().strftime("%Y-%m-%d")
 		till_date = since_date

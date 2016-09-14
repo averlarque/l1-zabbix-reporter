@@ -80,7 +80,8 @@ def login():
 @app.route('/login', method='POST')
 def do_login():
 	dct = {'host': request.forms.get('host'),
-		   'user': request.forms.get('username')}
+		   'user': request.forms.get('username'),
+	       'time': str(today)[:19]}
 	password = request.forms.get('password')
 	if login_check(dct, password) is True:
 		p_handler(dct)
@@ -89,6 +90,14 @@ def do_login():
 	else:
 		return render('status.tpl', {'text': login_fail})
 
+
+@app.route('/settings')
+def settings():
+	data = p_load()
+	context = {'host': data.get('host'),
+	           'user': data.get('user'),
+	           'time': data.get('time')}
+	return render('settings.tpl', context)
 
 @app.route('/about')
 def about():
