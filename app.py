@@ -80,7 +80,8 @@ def login():
 @app.route('/login', method='POST')
 def do_login():
 	dct = {'host': request.forms.get('host'),
-		   'user': request.forms.get('username')}
+		   'user': request.forms.get('username'),
+	       'time': str(today)[:19]}
 	password = request.forms.get('password')
 	if login_check(dct, password) is True:
 		p_handler(dct)
