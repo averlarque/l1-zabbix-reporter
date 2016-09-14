@@ -1,13 +1,10 @@
 {% extends 'base.tpl' %}
 
     {% block title %}
-        Zabbix Reporter L1 - Login Settings
+        Zabbix Reporter L1 - Login
     {% endblock title %}
 
 	{% block tabs %}
-            <li class="tab col s4"><a target="_self" href="/report">Reporting</a></li>
-            <li class="tab col s4"><a class="active" target="_self" href="/login">Settings</a></li>
-            <li class="tab col s4"><a target="_self" href="/about">About</a></li>
     {% endblock tabs %}
 
 	{% block content %}
