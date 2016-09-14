@@ -91,6 +91,14 @@ def do_login():
 		return render('status.tpl', {'text': login_fail})
 
 
+@app.route('/settings')
+def settings():
+	data = p_load()
+	context = {'host': data.get('host'),
+	           'user': data.get('user'),
+	           'time': data.get('time')}
+	return render('settings.tpl', context)
+
 @app.route('/about')
 def about():
 	context = {'name': 1}
