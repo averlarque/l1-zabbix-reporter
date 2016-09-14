@@ -44,12 +44,12 @@ def get_dates():
 
 
 def p_handler(arg):
-	with open(static_path + 'tor.pk', 'wb') as f:
+	with open('log_info.pk', 'wb') as f:
 		pickle.dump(arg, f)
 
 
 def p_load():
-	with open(static_path + 'tor.pk', 'rb') as fl:
+	with open('log_info.pk', 'rb') as fl:
 		data = pickle.load(fl)
 	return data
 
