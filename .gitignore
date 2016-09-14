@@ -61,8 +61,7 @@ target/
 
 # Project files
 .idea/
-config.py
 reports/
 zabbixl1_venv/
-test.txt
+log_info.pk
 
