@@ -1,13 +1,27 @@
 import pickle
 import os
+import sys
+import subprocess
 from pyzabbix import ZabbixAPI
 from datetime import datetime
 from pathlib import PurePath
 
-pure_path_templates = PurePath(os.getcwd()).joinpath('templates')
+
+root_path = os.getcwd()
+pure_path_templates = PurePath(root_path).joinpath('templates')
 temp_path = str(pure_path_templates)
 static_path = str(pure_path_templates.joinpath('static'))
 today = datetime.now()
+
+
+def open_reports_folder():
+	report_folder_path = str(PurePath(root_path).joinpath('reports'))
+	if sys.platform == 'darwin':
+		subprocess.Popen(['open', report_folder_path])
+	elif sys.platform == 'linux2':
+		subprocess.Popen(['xdg-open', report_folder_path])
+	elif sys.platform == 'win32':
+		subprocess.Popen(['explorer', report_folder_path])
 
 
 def get_hours():
@@ -108,4 +122,3 @@ e500 = '''
 	a description of an issue.\n</p>
 
 '''
-

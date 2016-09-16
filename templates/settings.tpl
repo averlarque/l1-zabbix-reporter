@@ -17,5 +17,6 @@
 			Login time: {{time}}
 		</p>
 		<a class="btn btn-large" href="/login">Re-Login</a>
+		<a class="btn btn-large right" href="/reports_folder">Previous Reports</a>
 	</div>
 {% endblock content %}

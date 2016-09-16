@@ -1,4 +1,4 @@
-from bottle import Bottle, run, static_file, request
+from bottle import Bottle, run, static_file, request, redirect
 from jinja2 import Environment, FileSystemLoader
 from handlers import *
 from report_templates import *
@@ -98,6 +98,12 @@ def settings():
 	           'user': data.get('user'),
 	           'time': data.get('time')}
 	return render('settings.tpl', context)
+
+
+@app.route('/reports_folder')
+def reports_folder():
+	open_reports_folder()
+	redirect('/settings')
 
 @app.route('/about')
 def about():
