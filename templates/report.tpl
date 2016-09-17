@@ -3,107 +3,77 @@
 {% block title %}
   Zabbix Reporter L1 - Report
 {% endblock title %}
+
+{% block add_css %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock add_css %}
+
   
 {% block content %}
   <div class="row" id="reports">
-  <!-- Statement -->
-    <div class="row">
-      <div class="col s8 offset-s2">
-        <div class="card-panel teal">
-          <span class="white-text">Before making a report please make sure that you have
-          submitted your Zabbix login info in <a href="/login">Settings</a>. If you have any questions, please check the About section. In case of any issues please send its description to elijah.zaharov@gmail.com. Thanks!
-          </span>
-        </div>
-      </div>
-    </div>
 
     <div class="container">
-    <!-- Time period section -->
+    
     <form action="/report" method="post">
-      <div class="section">
-        <h5>Time Period</h5>
-        <div class="col s6">
+      <!-- Time period section -->
+      <h5>Time Period</h5>
 
-            <div class="col s6">
-              <div class="col s6">
-                <select class="browser-default" name="since_hour" required>
-                  <option value="" disabled selected>Hours</option>
-                  {% for h in hours %}
-                  <option value="{{h}}">{{h}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col s6">
-                <select class="browser-default" name="since_min" required>
-                  <option value="" disabled selected>Minutes</option>
-                  {% for m in mins %}
-                  <option value="{{m}}">{{m}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            <div class="col s6">
-              <input type="date" name="since_date" value="{{since_date}}" required>
-            </div>
-          
+      <div class="col s6">
+        <span class="col s12">Since:</span>
+        <!-- Since time input -->
+        <div class="input-field col s4 browser-default">
+          <i class="material-icons prefix">schedule</i>
+          <input type="time" name="since_time" style="text-align:center;" required>
         </div>
-        <div class="col s6">
-          
-            <div class="col s6">
-              <div class="col s6">
-                <select class="browser-default" name="till_hour" required>
-                  <option value="" disabled selected>Hours</option>
-                  {% for h in hours %}
-                  <option value="{{h}}">{{h}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col s6">
-                <select class="browser-default" name="till_min" required>
-                  <option value="" disabled selected>Minutes</option>
-                  {% for m in mins %}
-                  <option value="{{m}}">{{m}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-            <div class="col s6">
-              <input type="date" name="till_date" value="{{till_date}}" required>
-            </div>
-          
+        <!-- Since date input -->
+        <div class="input-field col s6 offset-s1">
+          <i class="material-icons prefix">today</i>
+          <input type="date" name="since_date" value="{{since_date}}" style="text-align:center;" required>
         </div>
       </div>
-      <!-- Report type -->
-      <div class="divider"></div>
-        <div class="section">
-          <h5>Report configuration</h5>
-            <div class="row">
-              <!-- General report -->
-              <div class="col s12" id="period_report">
-                <input class="with-gap" name="report_class" type="radio" id="period_class" value="period" checked  />
-                <label for="period_class">General report on a specified period</label>
-              </div>
-              <!-- Project report -->
-              <div class="col s6 " id="project_report">
-                <input class="with-gap" name="report_class" type="radio" id="project_class" value="project" />
-                <label for="project_class">Report on a specific project during the time 
-                period</label>
-              </div>
 
-              <div class="col s6">
-                <input type="text" name="project", placeholder="Project name" id="project_name" disabled required>      
-              </div>
-              <!-- Item report-->
-            <div class="col s6" id="item_report">
-              <input class="with-gap" name="report_class" type="radio" id="item_class" value="item"  />
-              <label for="item_class">Report on a specific item/app/host diring the time period </label>
-            </div>
-
-            <div class="col s6">
-                <input type="text" name="item", placeholder="Item/app/host title" id="item_name" disabled required>      
-            </div>
+      <div class="col s6">
+        <span class="col s12">Till:</span>
+        <!-- Till time input -->
+        <div class="input-field col s4">
+          <i class="material-icons prefix">schedule</i>
+          <input type="time" name="till_time" style="text-align:center;"  required>
+        </div>
+        <!-- Till date input -->
+        <div class="input-field col s6 offset-s1">
+          <i class="material-icons prefix">today</i>
+          <input type="date" name="till_date" value="{{till_date}}" style="text-align:center;" required>
+        </div>
+        
+      </div>
+       
+      <h5>Report Configuration</h5>
+        <div class="row">
+          <!-- General report -->
+          <div class="col s12" id="period_report">
+            <input class="with-gap" name="report_class" type="radio" id="period_class" value="period" checked  />
+            <label for="period_class">General report on a specified period</label>
           </div>
+          <!-- Project report -->
+          <div class="col s6 " id="project_report">
+            <input class="with-gap" name="report_class" type="radio" id="project_class" value="project" />
+            <label for="project_class">Report on a specific project during the time 
+            period</label>
+          </div>
+
+          <div class="col s6">
+            <input type="text" name="project", placeholder="Project name" id="project_name" disabled required>      
+          </div>
+          <!-- Item report-->
+        <div class="col s6" id="item_report">
+          <input class="with-gap" name="report_class" type="radio" id="item_class" value="item"  />
+          <label for="item_class">Report on a specific item/app/host diring the time period </label>
+        </div>
+
+        <div class="col s6">
+            <input type="text" name="item", placeholder="Item/app/host title" id="item_name" disabled required>      
+        </div>
+      </div>
         
 
         <!-- Report formats -->
@@ -125,9 +95,8 @@
         
         <div class="row">
           <input class="btn waves-effect waves-light col s2" type="submit" value="GENERATE">
-          <!--<input class="btn waves-effect waves-light right" type="reset" value="RESET">-->
         </div>
-       </div> 
+       
       </form>
     </div>
   </div>
