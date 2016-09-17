@@ -46,3 +46,7 @@ class ZabbixApi:
     def get_alert_by_event(self, eventid):
         result = self.zabbix.do_request('alert.get', {'output': 'extend', 'eventids': eventid, 'limit': 1})
         return result
+    
+    def get_version(self):
+        version = self.zabbix.api_version()
+        return version

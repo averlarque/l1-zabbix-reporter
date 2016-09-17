@@ -13,6 +13,7 @@ class CountPeriodReport:
 		self.creds = p_load()
 		self.zabbix = ZabbixApi(self.creds['host'], self.creds['user'],
 		                        os.environ.get('pass'))
+		self.api_version = self.zabbix.get_version()
 		self.since = since
 		self.till = till
 		self.db = ':memory:'
@@ -20,8 +21,8 @@ class CountPeriodReport:
 		self.general_report_data = self.get_general_report_data()
 
 	def get_general_report_data(self):
-		result = ['Period: ' + str(self.since) + ' - ' + str(self.till) + '\n',
-			     'Monitoring system: Zabbix \n']
+		result = ['Host: ' + self.creds['host'] + '\n', 'Zabbix Server ' + self.api_version + '\n',
+		          'Period: ' + str(self.since) + ' - ' + str(self.till) + '\n']
 		return result
 
 	@staticmethod
