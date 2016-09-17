@@ -23,7 +23,7 @@
         <!-- Since time input -->
         <div class="input-field col s4 browser-default">
           <i class="material-icons prefix">schedule</i>
-          <input type="time" name="since_time" style="text-align:center;" required>
+          <input type="time" name="since_time" value="{{since_time}}" style="text-align:center;" required>
         </div>
         <!-- Since date input -->
         <div class="input-field col s6 offset-s1">
@@ -37,7 +37,7 @@
         <!-- Till time input -->
         <div class="input-field col s4">
           <i class="material-icons prefix">schedule</i>
-          <input type="time" name="till_time" style="text-align:center;"  required>
+          <input type="time" name="till_time" value="{{till_time}}" style="text-align:center;"  required>
         </div>
         <!-- Till date input -->
         <div class="input-field col s6 offset-s1">

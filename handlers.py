@@ -24,36 +24,25 @@ def open_reports_folder():
 		subprocess.Popen(['explorer', report_folder_path])
 
 
-def get_hours():
-	hours = []
-	for x in range(24):
-		if x < 10:
-			h = '0' + str(x)
-			hours.append(h)
-		else:
-			hours.append(str(x))
-	return hours
-
-
-def get_minutes():
-	minutes = []
-	for x in range(60):
-		if x < 10:
-			m = '0' + str(x)
-			minutes.append(m)
-		else:
-			minutes.append(str(x))
-	return minutes
-
-
-def get_dates():
+def get_datetime():
+	today_str = today.date().strftime("%Y-%m-%d")
+	till_time = str(today.hour) + ':' + str(today.minute)
+	till_date = today_str
+	
 	if 9 < today.hour < 21:
-		since_date = today.date().strftime("%Y-%m-%d")
-		till_date = since_date
+		since_date = today_str
+		since_time = '09:00'
+		
+	elif today.hour < 9:
+		since_date = today.replace(day=today.day - 1).strftime("%Y-%m-%d")
+		since_time = '21:00'
+		
 	else:
-		since_date = today.replace(day=today.day -1).strftime("%Y-%m-%d")
-		till_date = today.date().strftime("%Y-%m-%d")
-	return since_date, till_date
+		since_time = '21:00'
+		since_date = today_str
+	
+	result = {'since': (since_time, since_date), 'till': (till_time, till_date)}
+	return result
 
 
 def p_handler(arg):
@@ -78,16 +67,18 @@ def login_check(cred, password):
 
 def time_handler(since, till):
 	since_date = since['date'].split('-')
+	since_time = since['time'].split(':')
 	start_time = datetime(
 		int(since_date[0]), int(since_date[1]), int(since_date[2]),
-		hour=int(since['hour']), minute=int(since['minute'])
+		hour=int(since_time[0]), minute=int(since_time[1])
 	)
 	till_date = till['date'].split('-')
-	till_time = datetime(
+	till_time = till['time'].split(':')
+	end_time = datetime(
 		int(till_date[0]), int(till_date[1]), int(till_date[2]),
-		hour=int(till['hour']), minute=int(till['minute'])
+		hour=int(till_time[0]), minute=int(till_time[1])
 	)
-	return start_time, till_time
+	return start_time, end_time
 
 login_ok = '''Hi {0}! You are logged in your Zabbix account.\n
 	Press button below to return for report creation.
