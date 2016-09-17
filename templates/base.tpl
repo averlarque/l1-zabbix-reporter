@@ -14,20 +14,18 @@
       <div class="navbar">
         <nav>
           <div class="nav-wrapper">
-            <a href="#!" class="brand-logo center">Zabbix Reporter v0.3.L1 (beta)</a>
+            <a href="#!" class="brand-logo center">L1 Zabbix Reporter</a>
           </div>
         </nav>
       </div>
       <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
+          <ul class="tabs row">
             {% block tabs %}
             <li class="tab col s4"><a class="active" target="_self" href="/report">Reporting</a></li>
             <li class="tab col s4"><a target="_self" href="/settings">Settings</a></li>
             <li class="tab col s4"><a target="_self" href="/about">About</a></li>
             {% endblock tabs %}
           </ul>
-        </div>
       </div>
       {% block content %}
       {% endblock content %}

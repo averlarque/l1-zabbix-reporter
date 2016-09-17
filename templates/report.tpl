@@ -19,7 +19,7 @@
       <h5>Time Period</h5>
 
       <div class="col s6">
-        <span class="col s12">Since:</span>
+        <span class="col s12">Start time:</span>
         <!-- Since time input -->
         <div class="input-field col s4 browser-default">
           <i class="material-icons prefix">schedule</i>
@@ -33,7 +33,7 @@
       </div>
 
       <div class="col s6">
-        <span class="col s12">Till:</span>
+        <span class="col s12">End time:</span>
         <!-- Till time input -->
         <div class="input-field col s4">
           <i class="material-icons prefix">schedule</i>

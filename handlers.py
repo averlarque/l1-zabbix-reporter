@@ -11,11 +11,11 @@ root_path = os.getcwd()
 pure_path_templates = PurePath(root_path).joinpath('templates')
 temp_path = str(pure_path_templates)
 static_path = str(pure_path_templates.joinpath('static'))
+report_folder_path = str(PurePath(root_path).joinpath('reports'))
 today = datetime.now()
 
 
 def open_reports_folder():
-	report_folder_path = str(PurePath(root_path).joinpath('reports'))
 	if sys.platform == 'darwin':
 		subprocess.Popen(['open', report_folder_path])
 	elif sys.platform == 'linux2':
@@ -29,7 +29,7 @@ def get_datetime():
 	till_time = str(today.hour) + ':' + str(today.minute)
 	till_date = today_str
 	
-	if 9 < today.hour < 21:
+	if 9 < today.hour <= 21:
 		since_date = today_str
 		since_time = '09:00'
 		
@@ -58,11 +58,14 @@ def p_load():
 
 def login_check(cred, password):
 	try:
-		ZabbixAPI(cred['host'], user=cred['user'], password=password)
+		z = ZabbixAPI(cred['host'], user=cred['user'], password=password)
 		result = True
+		# return api version
+		api = z.api_version()
 	except:
 		result = False
-	return result
+		api = None
+	return result, api
 
 
 def time_handler(since, till):

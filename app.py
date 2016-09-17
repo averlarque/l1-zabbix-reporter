@@ -84,7 +84,9 @@ def do_login():
 		   'user': request.forms.get('username'),
 	       'time': str(today)[:19]}
 	password = request.forms.get('password')
-	if login_check(dct, password) is True:
+	check = login_check(dct, password)
+	if check[0] is True:
+		dct.update({'api': check[1]})
 		p_handler(dct)
 		os.environ['pass'] = password
 		return render('status.tpl', {'text': login_ok.format(dct['user'])})
@@ -97,7 +99,9 @@ def settings():
 	data = p_load()
 	context = {'host': data.get('host'),
 	           'user': data.get('user'),
-	           'time': data.get('time')}
+	           'time': data.get('time'),
+	           'api': data.get('api'),
+	           'reports': report_folder_path}
 	return render('settings.tpl', context)
 
 
