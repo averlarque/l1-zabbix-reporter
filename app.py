@@ -16,26 +16,27 @@ def render(tpl, context):
 
 @app.route('/report')
 def report():
-	dates = get_dates()
-	context = {'hours': get_hours(), 'mins': get_minutes(),
-	           'since_date': dates[0], 'till_date': dates[1]}
+	data = get_datetime()
+	since = data.get('since')
+	till = data.get('till')
+	context = {'since_time': since[0], 'since_date': since[1],
+	           'till_time': till[0], 'till_date': till[1]}
 	return render('report.tpl', context)
 
 
 @app.route('/report', method='POST')
 def make_report():
 	since = {
-		'hour': request.forms.get('since_hour'),
-		'minute': request.forms.get('since_min'),
+		'time': request.forms.get('since_time'),
 		'date': request.forms.get('since_date')
 	}
 	till = {
-		'hour': request.forms.get('till_hour'),
-		'minute': request.forms.get('till_min'),
+		'time': request.forms.get('till_time'),
 		'date': request.forms.get('till_date')
 	}
+	
 	time_period = time_handler(since, till)
-
+	
 	report_type = request.forms.get('type')
 
 	report_format = request.forms.get('format')
@@ -60,7 +61,7 @@ def make_report():
 			time_period[0], time_period[1], report_format=report_format,
 			report_type=report_type)
 		reporter.generate_report()
-
+	
 	return render('status.tpl', {'text': report_ok})
 
 
@@ -83,7 +84,9 @@ def do_login():
 		   'user': request.forms.get('username'),
 	       'time': str(today)[:19]}
 	password = request.forms.get('password')
-	if login_check(dct, password) is True:
+	check = login_check(dct, password)
+	if check[0] is True:
+		dct.update({'api': check[1]})
 		p_handler(dct)
 		os.environ['pass'] = password
 		return render('status.tpl', {'text': login_ok.format(dct['user'])})
@@ -96,7 +99,9 @@ def settings():
 	data = p_load()
 	context = {'host': data.get('host'),
 	           'user': data.get('user'),
-	           'time': data.get('time')}
+	           'time': data.get('time'),
+	           'api': data.get('api'),
+	           'reports': report_folder_path}
 	return render('settings.tpl', context)
 
 
@@ -104,6 +109,7 @@ def settings():
 def reports_folder():
 	open_reports_folder()
 	redirect('/settings')
+
 
 @app.route('/about')
 def about():
@@ -124,10 +130,7 @@ def error500(error):
 	return render('status.tpl', {'text': e500})
 
 
-handler = {
-    500: error500,
-	404: error404
-}
+handler = {500: error500, 404: error404}
 
 app.error_handler = handler
 

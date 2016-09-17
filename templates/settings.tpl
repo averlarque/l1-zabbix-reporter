@@ -12,11 +12,48 @@
 
 {% block content %}
 	<div class="container">
-		<p> Zabbix host: {{host}} <br>
-			Signed as: {{user}} <br>
-			Login time: {{time}}
-		</p>
-		<a class="btn btn-large" href="/login">Re-Login</a>
-		<a class="btn btn-large right" href="/reports_folder">Previous Reports</a>
+		<div class="row">
+			
+			<div class="col s4 m4 l4 card">
+				<div class="card-content">
+					<span class="card-title">User Info</span>
+					<h6>Username: {{user}}</h6>
+					<h6>Last login: {{time}}</h6>
+					<div class="card-action">
+              			<a href="/login">Re-login</a>
+            		</div>
+				</div>
+			</div>
+			<div class="col s4 m4 l4 card">
+				<div class="card-content">
+					<span class="card-title">Zabbix Info</span>
+					<h6>Host: {{host}}</h6>
+					<h6>API version: {{api}}</h6>
+					<div class="card-action">
+              			<a href="{{host}}">Go to Host</a>
+            		</div>
+				</div>
+			</div>
+			<div class="col s4 m4 l4 card">
+				<div class="card-content">
+					<span class="card-title">Reports</span>
+					<h6>Reports folder:</h6>
+					<h6>{{reports}}</h6>
+					<div class="card-action">
+              			<a href="/reports_folder">Check Reports</a>
+            		</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+      		<div class="col s12">
+	        	<div class="card-panel" style="background-color: #757575;">
+	          		<span class="white-text">
+	          		L1 Zabbix Reporter - version 1.0. Released in September 2016. This project is under the <a href="https://github.com/averlarque/l1-zabbix-reporter/blob/master/LICENSE">MIT License</a>. <br>You can check and contribute to the source code on <a href="https://github.com/averlarque/l1-zabbix-reporter">Github</a>. In case of any problems please report them <a href="https://github.com/averlarque/l1-zabbix-reporter/issues">here</a>. 
+	          		</span>
+	        	</div>
+      		</div>
+    	</div>
 	</div>
 {% endblock content %}
