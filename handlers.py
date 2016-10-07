@@ -6,16 +6,22 @@ from pyzabbix import ZabbixAPI
 from datetime import datetime
 from pathlib import PurePath
 
-
+# Root app folder path
 root_path = os.getcwd()
 pure_path_templates = PurePath(root_path).joinpath('templates')
+# Path to templates folder
 temp_path = str(pure_path_templates)
+# Path to folder with static files
 static_path = str(pure_path_templates.joinpath('static'))
+# Path to reports folder
 report_folder_path = str(PurePath(root_path).joinpath('reports'))
+# Current date&time
 today = datetime.now()
 
 
+# To open folder with reports on local system
 def open_reports_folder():
+    # Checking OS, choose the required explorer and open a window
 	if sys.platform == 'darwin':
 		subprocess.Popen(['open', report_folder_path])
 	elif sys.platform == 'linux2':
@@ -24,15 +30,17 @@ def open_reports_folder():
 		subprocess.Popen(['explorer', report_folder_path])
 
 
+# Pass time values to the report template
 def get_datetime():
 	today_str = today.date().strftime("%Y-%m-%d")
+	# Till date&time always current time
 	till_time = str(today.hour) + ':' + str(today.minute)
 	till_date = today_str
-	
+	# If it's day shift
 	if 9 < today.hour <= 21:
 		since_date = today_str
 		since_time = '09:00'
-		
+	# If it's night shift	
 	elif today.hour < 9:
 		since_date = today.replace(day=today.day - 1).strftime("%Y-%m-%d")
 		since_time = '21:00'
@@ -45,17 +53,20 @@ def get_datetime():
 	return result
 
 
+# Write data to pk-file
 def p_handler(arg):
 	with open('log_info.pk', 'wb') as f:
 		pickle.dump(arg, f)
 
 
+# Extract data from pk-file
 def p_load():
 	with open('log_info.pk', 'rb') as fl:
 		data = pickle.load(fl)
 	return data
 
 
+# Check access to a host and try to get it's version
 def login_check(cred, password):
 	try:
 		z = ZabbixAPI(cred['host'], user=cred['user'], password=password)
@@ -68,6 +79,7 @@ def login_check(cred, password):
 	return result, api
 
 
+# Converts incoming reports timestamps
 def time_handler(since, till):
 	since_date = since['date'].split('-')
 	since_time = since['time'].split(':')
@@ -82,6 +94,9 @@ def time_handler(since, till):
 		hour=int(till_time[0]), minute=int(till_time[1])
 	)
 	return start_time, end_time
+	
+	
+# Status texts
 
 login_ok = '''Hi {0}! You are logged in your Zabbix account.\n
 	Press button below to return for report creation.
