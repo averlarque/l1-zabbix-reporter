@@ -2,14 +2,20 @@ from pyzabbix import ZabbixAPI
 from datetime import datetime
 
 
+# Generator function
 def generator(items):
     for i in items:
         yield i
 
 
-# noinspection PyTypeChecker
 class ZabbixApi:
     def __init__(self, url, user, password):
+        """
+        Constructor-connection to Zabbix server API
+        :param url: Str - zabbix host server
+        :param user: Str
+        :param password: Str
+        """
         self.zabbix = ZabbixAPI(url, user=user, password=password)
 
     @staticmethod
@@ -38,9 +44,9 @@ class ZabbixApi:
     def get_events_by_time(self, time_from, time_till=datetime.now()):
         converted_unix_time_from = self.datetime_to_unix_time(self.convert_time(time_from))
         converted_unix_time_till = self.datetime_to_unix_time(self.convert_time(time_till))
-        result = self.zabbix.do_request('event.get', {'output': 'extend', 'source': 0, 'value': 1,
-                                                      'time_from': converted_unix_time_from,
-                                                      'time_till': converted_unix_time_till})
+        api_query = {'output': 'extend', 'source': 0, 'value': 1,
+                     'time_from': converted_unix_time_from, 'time_till': converted_unix_time_till}
+        result = self.zabbix.do_request('event.get', api_query)
         return result
 
     def get_alert_by_event(self, eventid):
