@@ -98,9 +98,7 @@ def time_handler(since, till):
 	
 # Status texts
 
-login_ok = '''Hi {0}! You are logged in your Zabbix account.\n
-	Press button below to return for report creation.
-'''
+login_ok = '''Hi {0}! You are logged in your Zabbix account.\n'''
 
 login_fail = '''
 	Something went wrong. Please check your credentials and operability of a chosen
@@ -109,10 +107,8 @@ login_fail = '''
 '''
 
 e404 = '''
-	The page was not found. May be something went wrong or may be it's
-	something wrong with you.\n
-	Anyway, please check the URL or try to reboot this app. \n
-	If nothing helps, please send email to elijah.zaharov@gmail.com about the issue.
+	The page was not found.\n
+	Please check the URL or try to reboot this app. \n
 '''
 
 report_ok = '''
@@ -122,12 +118,7 @@ report_ok = '''
 e500 = '''
 	<h3>500 error.</h3> \n
 	\n
-	<p>Something happened. May be it something terrible, but please keep patience
-	and do not panic!\n</p>
-	<p>Get back and check if you've done all right (not speaking about your life).
-	Did you logged in your Zabbix account correctly, ah? \n
+	<p>Something happened.</p>\n
+	<p>Get back and check if you've done your previous actions right. \n
 	Otherwise reboot the app and try again. \n</p>
-	<p>If there is no hope insight, feel free to send email to elijah.zaharov@gmail.com with
-	a description of an issue.\n</p>
-
 '''
