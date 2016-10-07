@@ -17,7 +17,7 @@
     		<li>
       			<div class="collapsible-header"><h5>How to install it?</h5></div>
       			<div class="collapsible-body">
-      				<p>You can clone and run this git repositary or compile the app with PyIntsaller library.</p>
+      				<p>You can clone and run this git repository or compile the app with PyIntsaller library.</p>
       			</div>
     		</li>
     		<li>
@@ -51,7 +51,7 @@
     		<li>
       			<div class="collapsible-header"><h5>Does it work only on Windows OS?</h5></div>
       			<div class="collapsible-body">
-      				<p>It also should work on the other platforms. Python 3.5 support is the main requirement.</p>
+      				<p>It also should work on the other platforms. Python 3.5 support is the main requirement. In web part latest Google Chrome is preferred.</p>
       			</div>
     		</li>
     		<li>
