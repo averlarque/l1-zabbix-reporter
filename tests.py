@@ -117,11 +117,3 @@ def test_period_item_report():
 	print(report.report_name)
 	report.generate_report()
 
-
-if __name__ == '__main__':
-	#test_period_report()
-	#test_period_project_report()
-	test_period_item_report()
-	#test_event_period_report()
-	#test_project_event_period_report()
-	#test_item_event_period_report()
