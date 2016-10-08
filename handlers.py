@@ -11,17 +11,17 @@ root_path = os.getcwd()
 pure_path_templates = PurePath(root_path).joinpath('templates')
 # Path to templates folder
 temp_path = str(pure_path_templates)
+# Path to log info
+log_info_path = str(pure_path_templates.joinpath('log_info.pk'))
 # Path to folder with static files
 static_path = str(pure_path_templates.joinpath('static'))
 # Path to reports folder
 report_folder_path = str(PurePath(root_path).joinpath('reports'))
-# Current date&time
-today = datetime.now()
 
 
 # To open folder with reports on local system
 def open_reports_folder():
-    # Checking OS, choose the required explorer and open a window
+	# Checking OS, choose the required explorer and open a window
 	if sys.platform == 'darwin':
 		subprocess.Popen(['open', report_folder_path])
 	elif sys.platform == 'linux2':
@@ -32,9 +32,18 @@ def open_reports_folder():
 
 # Pass time values to the report template
 def get_datetime():
+	# Current date&time
+	today = datetime.now()
 	today_str = today.date().strftime("%Y-%m-%d")
 	# Till date&time always current time
-	till_time = str(today.hour) + ':' + str(today.minute)
+	till_hour = str(today.hour)
+	till_minute = str(today.minute)
+	# Check if hour or minute len = 1
+	if len(till_hour) == 1:
+		till_hour = '0' + till_hour
+	if len(till_minute) == 1:
+		till_minute = '0' + till_minute
+	till_time = till_hour + ':' + till_minute
 	till_date = today_str
 	# If it's day shift
 	if 9 < today.hour <= 21:
@@ -55,13 +64,13 @@ def get_datetime():
 
 # Write data to pk-file
 def p_handler(arg):
-	with open('log_info.pk', 'wb') as f:
+	with open(log_info_path, 'wb') as f:
 		pickle.dump(arg, f)
 
 
 # Extract data from pk-file
 def p_load():
-	with open('log_info.pk', 'rb') as fl:
+	with open(log_info_path, 'rb') as fl:
 		data = pickle.load(fl)
 	return data
 
