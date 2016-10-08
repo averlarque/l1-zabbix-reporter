@@ -10,7 +10,7 @@ Zabbix Reporter L1 - Status Page
 
 	<div class="row">
 		<div class="container">
-			<p>{{text}}</p>
+			<h4>{{text}}</h4>
 				<div>
 					<a class="btn btn-large col s2" href="/report">TO REPORT</a>
 					<a class="btn btn-large right" href="/settings">TO SETTINGS</a>

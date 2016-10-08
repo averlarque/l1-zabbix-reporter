@@ -63,5 +63,4 @@ target/
 .idea/
 reports/
 zabbixl1_venv/
-log_info.pk
 

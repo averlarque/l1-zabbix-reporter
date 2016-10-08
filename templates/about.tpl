@@ -1,7 +1,7 @@
 {% extends 'base.tpl' %}
 
 {% block title %}
-	Zabbix Reporter L1 - About
+	L1 Zabbix Reporter - About
 {% endblock title %}
 
 {% block tabs %}
@@ -17,7 +17,7 @@
     		<li>
       			<div class="collapsible-header"><h5>How to install it?</h5></div>
       			<div class="collapsible-body">
-      				<p>You can clone and run this git repository or compile the app with PyIntsaller library.</p>
+      				<p>You can clone and run this git repository or compile it to exe with PyInstaller library.</p>
       			</div>
     		</li>
     		<li>
@@ -51,13 +51,13 @@
     		<li>
       			<div class="collapsible-header"><h5>Does it work only on Windows OS?</h5></div>
       			<div class="collapsible-body">
-      				<p>It also should work on the other platforms. Python 3.5 support is the main requirement. In web part latest Google Chrome is preferred.</p>
+      				<p>It also should work on the other platforms with Python 3.5 support as a major requirement. For correct displaying the latest Google Chrome is preferred.</p>
       			</div>
     		</li>
     		<li>
       			<div class="collapsible-header"><h5>Can it work with the newest version of Zabbix?</h5></div>
       			<div class="collapsible-body">
-      				<p>It should work but I'm not sure as I there were no chances to test it on the newest Zabbxi versions yet.</p>
+      				<p>It should work but I'm not sure as I have no possibility to test it on the newest Zabbix versions.</p>
       			</div>
     		</li>
     		<li>

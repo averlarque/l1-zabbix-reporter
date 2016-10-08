@@ -1,7 +1,7 @@
 {% extends 'base.tpl' %}
 
 {% block title %}
-  Zabbix Reporter L1 - Report
+  L1 Zabbix Reporter - Report
 {% endblock title %}
 
 {% block add_css %}

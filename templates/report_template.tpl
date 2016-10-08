@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Zabbix report - {{file_name}}</title>
+	<title> L1 Zabbix report - {{file_name}}</title>
 </head>
 <body>
 	<div>
@@ -12,7 +12,7 @@
 		</p>
 	</div>
 	<div>
-		<ul>
+		<ul type="None">
 		{% if type == '0' %}
 			{% for item in report_data %}
 				<li>{{item}}</li>

@@ -1,7 +1,7 @@
 {% extends 'base.tpl' %}
 
 {% block title %}
-	Zabbix Reporter L1 - Settings
+	L1 Zabbix Reporter - Settings
 {% endblock title %}
 
 {% block tabs %}
@@ -50,7 +50,7 @@
       		<div class="col s12">
 	        	<div class="card-panel" style="background-color: #757575;">
 	          		<span class="white-text">
-	          		L1 Zabbix Reporter - version 1.0. Released in September 2016. This project is under the <a href="https://github.com/averlarque/l1-zabbix-reporter/blob/master/LICENSE">MIT License</a>. <br>You can check and contribute to the source code on <a href="https://github.com/averlarque/l1-zabbix-reporter">Github</a>. In case of any problems please report them <a href="https://github.com/averlarque/l1-zabbix-reporter/issues">here</a>. 
+	          		L1 Zabbix Reporter - version 1.0. Released in October 2016. This project is under the <a href="https://github.com/averlarque/l1-zabbix-reporter/blob/master/LICENSE">MIT License</a>. <br>You can check and contribute to the source code on <a href="https://github.com/averlarque/l1-zabbix-reporter">Github</a>. In case of any problems please report them <a href="https://github.com/averlarque/l1-zabbix-reporter/issues">here</a>. 
 	          		</span>
 	        	</div>
       		</div>

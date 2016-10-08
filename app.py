@@ -26,6 +26,7 @@ def report():
 	           'till_time': till[0], 'till_date': till[1]}
 	return render('report.tpl', context)
 
+
 # Report page receiver
 @app.route('/report', method='POST')
 def make_report():
@@ -45,7 +46,7 @@ def make_report():
 	report_format = request.forms.get('format')
 
 	report_class = request.forms.get('report_class')
-    # Launch report generation
+	# Launch report generation
 	if report_class == 'project':
 		project = request.forms.get('project')
 		reporter = ProjectPeriodReport(
@@ -86,7 +87,7 @@ def login():
 def do_login():
 	dct = {'host': request.forms.get('host'),
 		   'user': request.forms.get('username'),
-	       'time': str(today)[:19]}
+	       'time': str(datetime.now())[:19]}
 	password = request.forms.get('password')
 	check = login_check(dct, password)
 	# Check access to the host
@@ -131,17 +132,18 @@ def about():
 def send_static(filename):
 	return static_file(filename, root=static_path)
 
+
 # 404 error handler
 def error404(error):
 	return render('status.tpl', {'text': e404})
+
 
 # 500 error handler
 def error500(error):
 	return render('status.tpl', {'text': e500})
 
-
+# Init error handling
 handler = {500: error500, 404: error404}
-
 app.error_handler = handler
 
 # run(app, host='localhost', port=8060, debug=True)
